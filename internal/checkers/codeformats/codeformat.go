@@ -23,13 +23,22 @@ func (*Checker) Check() error {
 		return err
 	}
 	if output := string(bytes.TrimSpace(raw)); output != "" {
-		files := strings.Split(output, "\n")
-		fmt.Printf("⚠️ %d file(s) not formatted:\n\n", len(files))
-		for _, f := range files {
-			fmt.Println("  *", f)
+		var files []string
+		for _, s := range strings.Split(output, "\n") {
+			line := strings.TrimSpace(s)
+			if strings.HasPrefix(line, "go:") {
+				continue
+			}
+			files = append(files, line)
 		}
-		fmt.Println()
-		return errors.New("code not formatted")
+		if len(files) > 0 {
+			fmt.Printf("⚠️ %d file(s) not formatted:\n\n", len(files))
+			for _, f := range files {
+				fmt.Println("  *", f)
+			}
+			fmt.Println()
+			return errors.New("code not formatted")
+		}
 	}
 	return nil
 }
