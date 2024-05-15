@@ -8,11 +8,13 @@ import (
 	"github.com/RiemaLabs/nubit-ci/internal/checkers"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/codeformats"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/commits"
+	"github.com/RiemaLabs/nubit-ci/internal/checkers/importformats"
 	"github.com/RiemaLabs/nubit-ci/internal/logs"
 )
 
 var C = []checkers.Checker{
 	new(commits.Checker),
+	new(importformats.Checker),
 	new(codeformats.Checker),
 }
 
