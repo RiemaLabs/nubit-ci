@@ -6,6 +6,8 @@ const analyzer = "github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
 
 var args = []string{
 	"run",
+	// GitHub Actions analyze the modcache which is weird.
+	"--exclude-dirs=(^|/)mod($|/)",
 	"--exclude-dirs-use-default",
 	"--timeout=10m",
 	"--tests",
