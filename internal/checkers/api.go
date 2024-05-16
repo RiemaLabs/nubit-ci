@@ -24,5 +24,5 @@ func Tee(c *exec.Cmd) *exec.Cmd {
 
 // GoRun runs a Go package with a URL and arguments.
 func GoRun(gitURL string, args ...string) *exec.Cmd {
-	return exec.Command("go", append([]string{"run", gitURL}, args...)...)
+	return exec.Command("env", append([]string{"GO111MODULE=on", "go", "run", gitURL}, args...)...)
 }
