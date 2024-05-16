@@ -18,13 +18,13 @@ var C = []checkers.Checker{
 
 func main() {
 	var (
-		isListCheckers bool
-		skips          string
-		isFix          bool
+		isListCheckers, isFix bool
+		skips, only           string
 	)
 	flag.BoolVar(&isListCheckers, "l", false, "list available checkers")
-	flag.StringVar(&skips, "skips", "", "comma separated list of skipped rules")
 	flag.BoolVar(&isFix, "w", false, "apply fixes (if available(")
+	flag.StringVar(&skips, "skips", "", "comma separated list of skipped rules")
+	flag.StringVar(&only, "only", "", "run this rule only")
 	flag.Parse()
 
 	if isListCheckers {
@@ -45,6 +45,14 @@ func main() {
 		if _, ok := skipSet[c.Name()]; ok {
 			logs.L.Println("Skipping:", c.Name())
 			continue
+		}
+
+		if only != "" {
+			if only != c.Name() {
+				continue
+			} else {
+				logs.L.Println("Run only:", c.Name())
+			}
 		}
 
 		logs.L.Println("Checking:", c.Name())
