@@ -11,7 +11,7 @@ import (
 
 type Checker struct{}
 
-func (*Checker) Name() string   { return "code-format" }
+func (*Checker) Name() string   { return "go-format" }
 func (*Checker) Install() error { return nil }
 
 const formatter = "golang.org/x/tools/cmd/goimports@latest"

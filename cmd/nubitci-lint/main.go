@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/RiemaLabs/nubit-ci/internal/checkers"
+	"github.com/RiemaLabs/nubit-ci/internal/checkers/analyzers"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/codeformats"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/commits"
 	"github.com/RiemaLabs/nubit-ci/internal/logs"
@@ -14,6 +15,7 @@ import (
 var C = []checkers.Checker{
 	new(commits.Checker),
 	new(codeformats.Checker),
+	new(analyzers.Checker),
 }
 
 func main() {
