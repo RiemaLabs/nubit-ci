@@ -1,9 +1,12 @@
 package checkers
 
 import (
+	"errors"
 	"os"
 	"os/exec"
 )
+
+var ErrNoFixes = errors.New("no fixes available")
 
 type Checker interface {
 	Name() string

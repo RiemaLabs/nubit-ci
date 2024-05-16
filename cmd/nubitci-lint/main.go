@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"fmt"
 	"strings"
@@ -24,7 +25,7 @@ func main() {
 		skips, only           string
 	)
 	flag.BoolVar(&isListCheckers, "l", false, "list available checkers")
-	flag.BoolVar(&isFix, "w", false, "apply fixes (if available(")
+	flag.BoolVar(&isFix, "w", false, "apply fixes (if available)")
 	flag.StringVar(&skips, "skips", "", "comma separated list of skipped rules")
 	flag.StringVar(&only, "only", "", "run this rule only")
 	flag.Parse()
@@ -67,7 +68,10 @@ func main() {
 			}
 			logs.L.Printf("Checker %q run failed and start fixing: %v", c.Name(), err)
 			if err := c.Fix(); err != nil {
-				logs.L.Fatalf("Checker %q fix failed: %v", c.Name(), err)
+				if !errors.Is(err, checkers.ErrNoFixes) {
+					logs.L.Fatalf("Checker %q fix failed: %v", c.Name(), err)
+				}
+				logs.L.Printf("Checker %q no fixes available", c.Name())
 			}
 		}
 	}

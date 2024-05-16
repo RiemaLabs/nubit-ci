@@ -30,4 +30,4 @@ func (*Checker) Check() error {
 	)).Run()
 }
 
-func (*Checker) Fix() error { return nil }
+func (*Checker) Fix() error { return checkers.ErrNoFixes }
