@@ -1,6 +1,8 @@
 package analyzers
 
-import "github.com/RiemaLabs/nubit-ci/internal/checkers"
+import (
+	"github.com/RiemaLabs/nubit-ci/internal/executl"
+)
 
 const analyzer = "github.com/golangci/golangci-lint/cmd/golangci-lint@latest"
 
@@ -19,9 +21,9 @@ func (*Checker) Name() string   { return "go-analyze" }
 func (*Checker) Install() error { return nil }
 
 func (*Checker) Check() error {
-	return checkers.Tee(checkers.GoRun(analyzer, args...)).Run()
+	return executl.Tee(executl.GoRun(analyzer, args...)).Run()
 }
 
 func (*Checker) Fix() error {
-	return checkers.Tee(checkers.GoRun(analyzer, append(args, "--fix")...)).Run()
+	return executl.Tee(executl.GoRun(analyzer, append(args, "--fix")...)).Run()
 }

@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/RiemaLabs/nubit-ci/internal/checkers"
+	"github.com/RiemaLabs/nubit-ci/internal/executl"
 )
 
 type Checker struct{}
@@ -20,7 +21,7 @@ func (*Checker) Check() error {
 		fmt.Println(output)
 		return err
 	}
-	return checkers.Tee(exec.Command("go", "test", "./...")).Run()
+	return executl.Tee(exec.Command("go", "test", "./...")).Run()
 }
 
 func (*Checker) Fix() error { return checkers.ErrNoFixes }

@@ -4,6 +4,7 @@ import (
 	"os/exec"
 
 	"github.com/RiemaLabs/nubit-ci/internal/checkers"
+	"github.com/RiemaLabs/nubit-ci/internal/executl"
 )
 
 type Checker struct{}
@@ -11,7 +12,7 @@ type Checker struct{}
 func (*Checker) Name() string { return "commit-message" }
 
 func (*Checker) Install() error {
-	return checkers.Tee(exec.Command(
+	return executl.Tee(exec.Command(
 		"npm",
 		"i",
 		"-g",
@@ -21,7 +22,7 @@ func (*Checker) Install() error {
 }
 
 func (*Checker) Check() error {
-	return checkers.Tee(exec.Command(
+	return executl.Tee(exec.Command(
 		"npx",
 		"commitlint",
 		"--from=origin/main",

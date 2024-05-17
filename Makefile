@@ -1,8 +1,15 @@
+GOOS :=
+GOARCH :=
+ENV := GOOS=$(GOOS) GOARCH=$(GOARCH)
+
 .PHONY: build
-build: nubitci-lint
+build: nubitci-lint nubitci-release
 
 nubitci-lint:
-	go build -o $@ ./cmd/nubitci-lint
+	env $(ENV) go build -o $@ ./cmd/$@
+
+nubitci-release:
+	env $(ENV) go build -o $@ ./cmd/$@
 
 .PHONY: ci
 ci:

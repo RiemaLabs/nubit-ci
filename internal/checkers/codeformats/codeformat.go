@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/RiemaLabs/nubit-ci/internal/checkers"
+	"github.com/RiemaLabs/nubit-ci/internal/executl"
 )
 
 type Checker struct{}
@@ -17,7 +17,7 @@ func (*Checker) Install() error { return nil }
 const formatter = "golang.org/x/tools/cmd/goimports@latest"
 
 func (*Checker) Check() error {
-	raw, err := checkers.GoRun(formatter, "-l", ".").CombinedOutput()
+	raw, err := executl.GoRun(formatter, "-l", ".").CombinedOutput()
 	if err != nil {
 		fmt.Println(string(raw))
 		return err
@@ -44,5 +44,5 @@ func (*Checker) Check() error {
 }
 
 func (*Checker) Fix() error {
-	return checkers.Tee(checkers.GoRun(formatter, "-w", ".")).Run()
+	return executl.Tee(executl.GoRun(formatter, "-w", ".")).Run()
 }
