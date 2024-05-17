@@ -11,6 +11,7 @@ import (
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/builds"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/codeformats"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/commits"
+	"github.com/RiemaLabs/nubit-ci/internal/checkers/makefiles"
 	"github.com/RiemaLabs/nubit-ci/internal/checkers/testings"
 	"github.com/RiemaLabs/nubit-ci/internal/logs"
 )
@@ -21,6 +22,7 @@ var C = []checkers.Checker{
 	new(analyzers.Checker),
 	new(builds.Checker),
 	new(testings.Checker),
+	new(makefiles.Checker),
 }
 
 func main() {

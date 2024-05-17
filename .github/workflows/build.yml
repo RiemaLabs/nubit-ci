@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run nubitci-lint
-        run: go run ./cmd/nubitci-lint
+      - name: Build
+        run: make ci
